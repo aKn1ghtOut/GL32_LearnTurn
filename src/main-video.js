@@ -137,10 +137,23 @@ function updateCanvas(e, targetCanvas, plot) {
     targetCanvas.context.fillStyle = targetCanvas.color;
     targetCanvas.context.fillText(targetCanvas.context.fps + " fps", 5, 20);
     targetCanvas.lastTime = targetCanvas.startTime;
+
     for (let i = 0; i < e.data.features.length; i++) {
         let rect = e.data.features[i];
         targetCanvas.context.strokeRect(rect.x * canvases.scale, rect.y * canvases.scale, rect.width * canvases.scale, rect.height * canvases.scale);
     }
+    
+   /*
+   for (let i = 0; i < e.data.points.length; i++) {
+    let point = e.data.points[i];
+    targetCanvas.context.fillRect(point[0],point[1],1,1);  
+}
+*/
+console.log("Message received at main-video.js")
+if(e.data.points!=null)
+console.log(e.data.points.length)
+else
+console.log("Issa null")
 }
 
 wasmWorker.onmessage = function (e) {
