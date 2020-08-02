@@ -6,11 +6,12 @@ const RTStatus = new Mongo.Collection("RTStatus");
 
 RTStatus.schema = new Schema({
 
-	user: {
-		type: new Schema({
-			name: String,
-			id: String
-		})
+	userId: {
+		type : String,
+	},
+
+	username: {
+		type : String,
 	},
 
 	sessionId: {
@@ -48,7 +49,7 @@ RTStatus.schema = new Schema({
 
 	joinedAt: {
 		type: Date,
-		defaultValue: Date.now()
+		defaultValue: new Date()
 	},
 
 	

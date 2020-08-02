@@ -63,13 +63,10 @@ class Class1 extends Component {
 					
 				</div>
 					
-				{
-						this.props.loading ? null :
-						this.props.roomActive.map((el) => {
-							if(el.status == true)
-								return <RoomInfo sessArr = {el.sessions} count = {el.sessions.length} />
-						})
-				}
+					{
+						this.props.loading2 ? null :
+						<RoomInfo  />
+					}	
 				
 			</div>
 
@@ -81,11 +78,14 @@ const RoomsContain = withTracker( () => {
 
 	const rooms = Meteor.subscribe("Rooms.get");
 	const loading = rooms.ready() ? false : true;
+	const roomactive = Meteor.subscribe("Room.getActive");
+	const loading2 = roomactive.ready() ? false : true;
 
 	return {
 	loading,
+	loading2,
 	  rooms : loading || Rooms.find({owner : {uid: Meteor.userId()}}).fetch(),
-	  roomActive : loading || Rooms.find({owner : {uid: Meteor.userId()},status : true}).fetch(),
+	  roomActive : loading2 || Rooms.find({owner : {uid: Meteor.userId()},status : true}).fetch(),
 	  
 	};
 

@@ -14,6 +14,11 @@ import RTStatus from "../../models/RTStatus";
 
 class AttentionUserInfo extends Component {
 
+	componentWillReceiveProps(props)
+	{
+		console.log({props});
+	}
+
 	render() {
 
 		return (
@@ -22,20 +27,20 @@ class AttentionUserInfo extends Component {
 						<tbody>
 							<tr>
 								<th>Name</th>
-								<th>Attention Status</th>
-								<th>Login Time</th>
-								<th>Average Attention</th>
+								<th>Tab Status</th>
+								<th>Looking</th>
+								<th>Audio Level</th>
 							</tr>
 							{
 								this.props.loading ? null :
-								this.props.RTStatus.map(el => {
+								this.props.RTStatus.map(el => (
 									<tr>
-										<td>{el.user.name}</td>
-										<td><div className={`col-${el.attentionStatus}`}></div></td>
-										<td>{el.joinedAt}</td>
-										<td>{el.attentionQuotient}</td>
+										<td>{el.username}</td>
+										<td>{el.tabstatus ? "Yes" : "No"}</td>
+										<td>{el.looking ? "Yes" : "No"}</td>
+										<td>{Math.round(el.decibelLevel * 1000)}</td>
 									</tr>
-								}) 
+								)) 
 							}
 						</tbody>
 					</table>
@@ -50,7 +55,7 @@ const AttentionContainer = withTracker( (props) => {
 	
 	return {
 	  loading,
-	  RTStatus: loading || RTStatus.find({sessionId : props.sessionDisplayId}).fetch()
+	  RTStatus: loading || RTStatus.find({}).fetch()
 	};
 
 })(AttentionUserInfo);

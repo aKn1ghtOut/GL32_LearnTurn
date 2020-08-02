@@ -9,6 +9,7 @@ import './Home.scss'
 import ListProductsContainer from "../../components/ListProducts";
 import Sessions from "../../models/Sessions";
 import RTStatus from "../../models/RTStatus";
+import HomeTable from "../../components/HomeTable"
 
 
 
@@ -22,7 +23,7 @@ class HomePage extends Component
 		return (
 
 			<div className=" home-container">
-				<div className = "tableContainer">
+				{/* <div className = "tableContainer">
 					<table className = "infoTable">
 						<tbody>
 							<tr>
@@ -31,35 +32,41 @@ class HomePage extends Component
 								<th>Tab Status</th>
 								<th>Audio Status</th>
 							</tr>
-							{/* {
+							{
 								this.props.loading ? null :
-								this.props.details.map(el => {
+								this.props.RTStatus.map(el => (
 									<tr>
-										<td>{el.user.name}</td>
-										<td><div className={`col-${el.attentionStatus}`}></div></td>
-										<td><div className={`col-${el.tabstatus}`}></div></td>
-										<td><div className={el.decibelLevel}></div></td>
+										<td>{el.username}</td>
+										<td>{el.tabstatus ? "Yes" : "No"}</td>
+										<td>{el.looking ? "Yes" : "No"}</td>
+										<td>{Math.round(el.decibelLevel * 1000)}</td>
 									</tr>
-								}) 
-							} */}
+								)) 
+							}
 						</tbody>
 					</table>
-				</div>
+				</div> */}
+
+				{/* <HomeTable  sessionActive = {
+					this.props.loading ? null :
+					this.props.sessionActive[0]._id
+					}/> */}
+
 			</div>
-		);
+		)
 	}
 }
 
-const HomePageContainer = withTracker(()=>
-{
-	// const subscription = Meteor.subscribe("HomeAttentionDetails.get");
-	// var loading = !subscription.ready();
-	// const sessionActive = Sessions.find({status: true, owner: {uid : Meteor.userId()}})
+const HomePageContainer = withTracker( (props) => {
 
+	const sessionActive = Meteor.subscribe('Sessions.get');
+	const loading = sessionActive.ready() ? false : true ;
+	console.log(Sessions.find({status: true, owner : {uid : Meteor.userId()}}).fetch())
 	return {
-		// loading,
-		// details: loading || RTStatus.find({sessionId : sessionActive})
+		loading, 
+		sessionActive : loading || Sessions.find({status: true, owner : {uid : Meteor.userId()}}).fetch()
 	};
-})(HomePage)
+
+})(HomePage);
 
 export default HomePageContainer;

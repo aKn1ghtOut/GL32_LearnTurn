@@ -19,8 +19,6 @@ class Room1 extends Component {
 		super(props);
 
 		this.state = {
-			count : this.props.count - 1,
-			sessionArr : this.props.sessArr,
 			email : ''
 		};
 	
@@ -78,7 +76,9 @@ class Room1 extends Component {
 					<FontAwesomeIcon  className="left" icon={faCaretSquareRight}/>
 					<h2>	Session - 
 							{ 
-								this.state.sessionArr[this.state.count]
+			
+								this.props.loading || this.props.room.length == 0? null : 
+								this.props.room[0].sessions[this.props.room[0].sessions.length - 1]
 								
 							}
 							
@@ -87,9 +87,11 @@ class Room1 extends Component {
 					</div>
 				</div>
 				
-				
-
-				<AttentionUserInfo sessionDisplayId={this.state.sessionArr[this.state.count]}/>
+		
+				{<AttentionUserInfo sessionDisplayId={
+					this.props.loading || this.props.room.length == 0 ? null : 
+					this.props.room[0].sessions[this.props.room[0].sessions.length - 1]}
+				/>}
 
 				</div>
 			</div>
@@ -101,16 +103,14 @@ class Room1 extends Component {
 }
 
 const SessionSlider = withTracker( ({sessArr,count}) => {
-
+	
 	const sessions = Meteor.subscribe("Sessions.get");
 	const rooms = Meteor.subscribe("Room.getActive");
 	const loading = rooms.ready() ? false : true;
-	
+		
 	return {
 	  loading,
-	  sessionArr : sessArr,
-	  count : count,
-	  room: loading || Rooms.find( { owner: {uid : Meteor.userId()}, status:true }).fetch()
+	  room: loading || Rooms.find( { owner: {uid : Meteor.userId()}, status:true }).fetch(),
 	};
 
 })(Room1);

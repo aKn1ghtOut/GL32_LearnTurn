@@ -1,5 +1,6 @@
 import Schema from "simpl-schema";
 import { Mongo } from "meteor/mongo";
+import { string } from "prop-types";
 
 const DataPacket = new Mongo.Collection("DataPacket");
 
@@ -7,11 +8,17 @@ DataPacket.schema = new Schema({
 	
 	
 	serial: {
-		type: Number,
+		type: Date,
 		defaultValue: new Date()
 	},
 
-	
+	userId : {
+		type : String,
+	},
+
+	sessionId : {
+		type : String,
+	},
 
 	onscreen: {
 		type: Boolean,

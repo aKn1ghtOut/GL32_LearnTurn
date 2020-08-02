@@ -66,10 +66,9 @@ Meteor.startup(() => {
 
 	Accounts.createUser({
 		password: 'password',
-		email: 'mj@134',
+		email: 'mj950@snu.edu.in',
 	});
-	
-	
+
     render(<AppContainer />, document.getElementById('container'));
 
 });
