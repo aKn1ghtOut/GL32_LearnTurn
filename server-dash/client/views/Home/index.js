@@ -6,6 +6,10 @@ import Rooms from "../../models/Rooms";
 
 import './Home.scss'
 
+import ListProductsContainer from "../../components/ListProducts";
+import Sessions from "../../models/Sessions";
+import RTStatus from "../../models/RTStatus";
+
 
 
 
@@ -27,7 +31,17 @@ class HomePage extends Component
 								<th>Tab Status</th>
 								<th>Audio Status</th>
 							</tr>
-							
+							{/* {
+								this.props.loading ? null :
+								this.props.details.map(el => {
+									<tr>
+										<td>{el.user.name}</td>
+										<td><div className={`col-${el.attentionStatus}`}></div></td>
+										<td><div className={`col-${el.tabstatus}`}></div></td>
+										<td><div className={el.decibelLevel}></div></td>
+									</tr>
+								}) 
+							} */}
 						</tbody>
 					</table>
 				</div>
@@ -38,8 +52,13 @@ class HomePage extends Component
 
 const HomePageContainer = withTracker(()=>
 {
+	// const subscription = Meteor.subscribe("HomeAttentionDetails.get");
+	// var loading = !subscription.ready();
+	// const sessionActive = Sessions.find({status: true, owner: {uid : Meteor.userId()}})
+
 	return {
-		
+		// loading,
+		// details: loading || RTStatus.find({sessionId : sessionActive})
 	};
 })(HomePage)
 

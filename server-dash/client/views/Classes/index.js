@@ -5,6 +5,8 @@ import { withTracker } from "meteor/react-meteor-data";
 import { Accounts } from "meteor/accounts-base";
 import { _ } from "meteor/underscore";
 
+import Categories from "../../models/Categories";
+
 import './Classes.scss'
 
 import RoomsContain from "../../components/Rooms";

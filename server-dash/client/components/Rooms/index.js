@@ -5,11 +5,13 @@ import { withTracker } from "meteor/react-meteor-data"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretSquareRight } from "@fortawesome/free-regular-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
+import PropTypes, { func } from "prop-types";
 
 import "./Rooms.scss";
 
 import Rooms from "../../models/Rooms";
 
+import RoomInfo from "../../components/RoomInfo";
 
 class Class1 extends Component {
 
@@ -34,7 +36,6 @@ class Class1 extends Component {
 
 	changeRoomActive(roomId){
 		Meteor.call('Room.activeChange',roomId);
-		console.log(roomId);
 	}
 
 	render() {
@@ -62,6 +63,13 @@ class Class1 extends Component {
 					
 				</div>
 					
+				{
+						this.props.loading ? null :
+						this.props.roomActive.map((el) => {
+							if(el.status == true)
+								return <RoomInfo sessArr = {el.sessions} count = {el.sessions.length} />
+						})
+				}
 				
 			</div>
 
@@ -77,6 +85,8 @@ const RoomsContain = withTracker( () => {
 	return {
 	loading,
 	  rooms : loading || Rooms.find({owner : {uid: Meteor.userId()}}).fetch(),
+	  roomActive : loading || Rooms.find({owner : {uid: Meteor.userId()},status : true}).fetch(),
+	  
 	};
 
 })(Class1);

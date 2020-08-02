@@ -3,14 +3,12 @@
 .home-container{
 	max-width: 1600px !important;
 	padding: 0;
-	width: auto;
 	display: flex;
 	align-items: flex-start;
 
 	>div
 	{
 		flex: 1;
-		min-height: 75vh;
 
 		&:nth-child(2)
 		{

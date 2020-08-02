@@ -9,6 +9,7 @@ import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 
 import "./Sidebar.scss";
+import Categories from "../../models/Categories";
 
 class CategorySidebar extends Component
 {

@@ -10,15 +10,17 @@ Meteor.publish("AttentionDetails.get", function(sessionId){
 
 });
 
-Meteor.publish("HomeAttentionDetails.get", function(){
+// Meteor.publish("HomeAttentionDetails.get", function(){
     
-    let sessionUp = Sessions.find({status: true, roomId:{rid: RoomId}}).fetch;
-    if(sessionUp.length == 0){
-        console.log('No session Active');
-        return {};
-    }
-    else {
-        return RTStatus.find({sessionId : sessionId});
-    }
+//     let sessionUp = Sessions.find({status: true, roomId:{rid: RoomId}}).fetch;
+//     if(sessionUp.length == 0){
+//         console.log('No session Active');
+//         return {};
+//     }
+//     else {
+//         return RTStatus.find({sessionId : sessionId});
+//     }
     
-});
+// });
+
+

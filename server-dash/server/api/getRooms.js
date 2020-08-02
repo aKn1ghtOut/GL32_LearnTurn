@@ -56,5 +56,25 @@ Meteor.methods({
                 status : true,
             }
         })
-    }
+    },
+    'Student.add'(email){
+		check(email, String);
+
+        let roomActive = Rooms.find({status: true , owner : {uid : Meteor.userId()}});
+        if(roomActive.length != 0){
+            let roomId = ""
+            roomActive.map((el) => roomId = el._id);
+
+            Rooms.update({
+                _id : roomId,
+            },
+            {
+                $push : {
+                    attendees : email,
+                }
+            })
+        }
+
+		
+	},
 })

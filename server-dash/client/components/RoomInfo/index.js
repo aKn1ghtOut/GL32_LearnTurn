@@ -20,7 +20,8 @@ class Room1 extends Component {
 
 		this.state = {
 			count : this.props.count - 1,
-			sessionArr : this.props.sessArr
+			sessionArr : this.props.sessArr,
+			email : ''
 		};
 	
 	}
@@ -34,15 +35,25 @@ class Room1 extends Component {
 		Meteor.call('Session.end');
 	}
 
-	sessionLeft(){
-		if(this.state.count != 0)
-			this.setState({count : (this.state.count - 1)});
-		console.log('gfdgv')
-	}
+	// sessionLeft(){
+	// 	if(this.state.count != 0)
+	// 		this.setState({count : (this.state.count - 1)});
+	// 	console.log('gfdgv')
+	// }
 
-	sessionRight(){
-		if(this.state.count !== (this.props.count - 1 ))
-			this.setState({count : this.state.count + 1})
+	// sessionRight(){
+	// 	if(this.state.count !== (this.props.count - 1 ))
+	// 		this.setState({count : this.state.count + 1})
+	// }
+
+	addStudent(){
+		if(this.state.email.length != 0){
+			Meteor.call('Student.add',this.state.email);
+		} else {
+			console.log('Please Enter the email');
+		}
+
+		document.getElementById('studentEmail').value = "";
 	}
 
 	
@@ -54,7 +65,8 @@ class Room1 extends Component {
 			<div className = "tableContainer">
 			
 				<div className = "buttonContainer">
-					<button>Add Students</button>
+					<input id="studentEmail" type='email' onChange = {(e) => this.setState({email : e.currentTarget.value })} placeholder="student email"></input>
+					<button onClick = {() => this.addStudent()}>Add Students</button>
 					<button onClick = {() => this.createSession()}>Start Session</button>
 					<button onClick = {() => this.endSession()}>Stop Session</button>
 				</div>
@@ -63,7 +75,7 @@ class Room1 extends Component {
 
 				<div className= 'sessionDetails'>
 					<div>
-					<FontAwesomeIcon onClick = {() => this.sessionLeft} className="left" icon={faCaretSquareRight}/>
+					<FontAwesomeIcon  className="left" icon={faCaretSquareRight}/>
 					<h2>	Session - 
 							{ 
 								this.state.sessionArr[this.state.count]
@@ -71,13 +83,13 @@ class Room1 extends Component {
 							}
 							
 					</h2>
-					<FontAwesomeIcon onClick = {() => this.sessionRight} className="right" icon={faCaretSquareRight}/>
+					<FontAwesomeIcon className="right" icon={faCaretSquareRight}/>
 					</div>
 				</div>
 				
 				
 
-				<AttentionUserInfo sessionDisplayId={this.state.sessionId}/>
+				<AttentionUserInfo sessionDisplayId={this.state.sessionArr[this.state.count]}/>
 
 				</div>
 			</div>
@@ -88,7 +100,7 @@ class Room1 extends Component {
 	}
 }
 
-const SessionSlider = withTracker( () => {
+const SessionSlider = withTracker( ({sessArr,count}) => {
 
 	const sessions = Meteor.subscribe("Sessions.get");
 	const rooms = Meteor.subscribe("Room.getActive");
@@ -96,6 +108,8 @@ const SessionSlider = withTracker( () => {
 	
 	return {
 	  loading,
+	  sessionArr : sessArr,
+	  count : count,
 	  room: loading || Rooms.find( { owner: {uid : Meteor.userId()}, status:true }).fetch()
 	};
 

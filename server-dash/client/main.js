@@ -13,6 +13,7 @@ import "./main.scss";
 import Footer from './components/Footer';
 import CategorySidebar from "./components/CategorySidebar";
 import LoginForm  from "./components/LoginForm"
+import SettingsContainer from "./views/Settings"
 import ClassPageContainer from './views/Classes';
 import HomePage from './views/Home';
 import Header from './components/Header';
@@ -37,6 +38,8 @@ render(){
 			<Route path="/" exact component={HomePage} />
 			<Route path="/home" component={HomePage}  />
 			<Route path="/classes" component={ClassPageContainer}/>
+			<Route path="/settings" component={SettingsContainer}/>
+			<Route path="/logout" component={HomePage}/>
 				
 			</Switch>
 			<Footer/>
@@ -62,8 +65,8 @@ export default AppContainer;
 Meteor.startup(() => {
 
 	Accounts.createUser({
-		username: "learnturn",
-		password : "password"
+		password: 'password',
+		email: 'mj@134',
 	});
 	
 	
