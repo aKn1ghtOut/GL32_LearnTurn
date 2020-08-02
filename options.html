@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnTurn</title>
+</head>
+<body>
+    <style type="text/css">
+		#input-canvas {
+			width: 640px;
+			height: 480px;
+		}
+    </style>
+    
+    <h1>Do not close this page</h1>
+    <p>Allow access to camera, microphone</p>
+
+	<canvas id="input-canvas"></canvas>
+	<video id="webcam-video" preload="auto" loop playsinline autoplay></video>
+
+    <script src="recognition/options.js"></script>
+    <script src="recognition/dlib-wasm-test.js"></script>
+</body>
+</html>

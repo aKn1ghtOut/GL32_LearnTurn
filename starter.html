@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learnturn</title>
+</head>
+<body>
+    <style>
+        .box
+        {
+            min-width: 300px;
+            min-height: 100px;
+            position: relative;
+            padding: 20px 0;
+            font-size: 25px;
+            display: flex;
+        }
+        .box > *
+        {
+            vertical-align: middle;
+        }
+        .box#status > span
+        {
+            display: inline-block;
+            flex: 50% 0 0;
+            text-align: center;
+            vertical-align: middle;
+        }
+        button
+        {
+            font-size: 25px;
+            flex: 100% 1 1;
+            outline: none;
+            border: none;
+            background-color: azure;
+            color: black;
+            text-transform: uppercase;
+            transition: all 0.1s ease-in-out;
+            cursor: pointer;
+        }
+        button:hover
+        {
+            filter: brightness(0.7);
+        }
+    </style>
+    <div class="box" id="status">
+        <span>Status: </span>
+        <span id="statusbox">Logged In</span>
+    </div>
+    <div class="box">
+        <button id="connector">Connect</button>
+    </div>
+    <script src="js/starter.js"></script>
+</body>
+</html>
