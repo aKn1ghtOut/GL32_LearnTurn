@@ -18,7 +18,7 @@ class Header extends Component
 	{
 		return (
 		<div className="container-fluid" id="footer_area">
-			Copyright Campus-Kart 2020
+			LearnTurn
 		</div>
 		);
 	}

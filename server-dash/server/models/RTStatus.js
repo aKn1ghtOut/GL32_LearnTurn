@@ -48,7 +48,7 @@ RTStatus.schema = new Schema({
 		defaultValue : false
 	},
 
-	randomCheck : {
+	timeTaken : {
 		type : Number,
 	},
 

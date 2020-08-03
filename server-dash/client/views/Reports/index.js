@@ -30,11 +30,11 @@ class report extends Component
 						<tbody>
 							<tr>
 								<th>email</th>
+								<th>Attention Score</th>
 								<th>Tab Status</th>
 								<th>Looking</th>
 								<th>Audio Level</th>
 								<th>Mouth open</th>
-								<th>Presence</th>
 								<th>Drowsy</th>
 								<th>Random Check</th>
 								<th>Time</th>
@@ -45,13 +45,13 @@ class report extends Component
 									
 									<tr>
 										<td>{el.email}</td>
+										<td>{el.attentionScore}</td>
 										<td>{el.tabstatus? "Yes" : "No"}</td>
 										<td>{el.onscreen? "Yes" : "No"}</td>
 										<td>{el.decibelLevel * 1000}</td>
 										<td>{el.mouthOpen? "Yes" : "No"}</td>
-										<td>{el.presence? "Yes" : "No"}</td>
 										<td>{el.drowsy? "Yes" : "No"}</td>
-										<td>{el.randomCheck}</td>
+										<td>{el.timeTaken}</td>
 										<td>{el.serial.toLocaleString() }</td>
 									</tr>
 									

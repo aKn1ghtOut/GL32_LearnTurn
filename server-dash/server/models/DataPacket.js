@@ -44,13 +44,18 @@ DataPacket.schema = new Schema({
 		defaultValue : false
 	},
 
-	randomCheck : {
+	timeTaken : {
 		type : Number,
 	},
 
 	drowsy : {
 		type : Boolean,
 		defaultValue : false,
+	},
+
+	attentionScore : {
+		type : Number,
+		defaultValue : 100,
 	}
 
 })

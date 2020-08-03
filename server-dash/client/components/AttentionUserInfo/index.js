@@ -30,7 +30,6 @@ class AttentionUserInfo extends Component {
 								<th>Tab Status</th>
 								<th>Looking</th>
 								<th>Audio Level</th>
-								<th>presence</th>
 								<th>drowsy</th>
 								<th>Mouth open</th>
 								<th>Random Check</th>
@@ -46,10 +45,9 @@ class AttentionUserInfo extends Component {
 										<td>{el.tabstatus ? "Yes" : "No"}</td>
 										<td>{el.onscreen ? "Yes" : "No"}</td>
 										<td>{Math.round(el.decibelLevel * 1000)}</td>
-										<td>{el.presence ? "Yes" : "No"}</td>
 										<td>{el.drowsy ? "Yes" : "No"}</td>
 										<td>{el.mouthOpen ? "Yes" : "No"}</td>
-										<td>{el.randomCheck}</td>
+										<td>{el.timeTaken}</td>
 									</tr>
 								)) 
 							}
