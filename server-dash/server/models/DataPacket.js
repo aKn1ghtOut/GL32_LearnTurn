@@ -48,11 +48,6 @@ DataPacket.schema = new Schema({
 		type : Number,
 	},
 
-	presence : {
-		type : Boolean,
-		defaultValue: true
-	},
-
 	drowsy : {
 		type : Boolean,
 		defaultValue : false,

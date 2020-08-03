@@ -27,13 +27,12 @@ Meteor.methods({
 	
 	'dataPacket.get'(params){
 
-        const {looking,tabStatus,audioLevel,mouthOpen,drowsy,presence,randomCheck} = params;
+        const {looking,tabStatus,audioLevel,mouthOpen,drowsy,randomCheck} = params;
 
         check(looking, Boolean);
         check(tabStatus, Boolean);
         check(audioLevel, Number);
         check(randomCheck, Number);
-        check(presence, Boolean);
         check(drowsy, Boolean);
         check(mouthOpen, Boolean);
 
@@ -55,7 +54,7 @@ Meteor.methods({
                 let checkEntry = RTStatus.find({userId : userId,sessionId: sessionId}).fetch();
 
                 console.log(checkEntry);
-
+                
                 DataPacket.insert({
                     userId : userId,
                     sessionId : sessionId,
@@ -64,11 +63,28 @@ Meteor.methods({
                     tabstatus : tabStatus,
                     decibelLevel : audioLevel,
                     mouthOpen : mouthOpen,
-                    presence : presence,
                     drowsy : drowsy,
                     randomCheck : randomCheck,
                     serial : new Date(),
                 });
+
+                let drowsyCount = 0;
+                let mouthOpenCount = 0;
+                let lookingCount = 0; 
+
+                const RT = RTStatus.find({userId: userId, sessionId:sessionId}).fetch();
+                if(RT.length != 0){
+                    if(drowsy == true){
+                        drowsyCount = RTStatus[0].drowsyCount + 1;
+                    }
+                    if(looking == false){
+                        lookingCount = RTStatus[0].lookingCount + 1;
+                    }
+                    if(mouthOpen == true){
+                        mouthOpenCount = RTStatus[0].mouthOpenCount + 1;
+                    }
+                    
+                }
 
                 if(checkEntry.length == 0 ){
 
@@ -80,7 +96,6 @@ Meteor.methods({
                         tabstatus : tabStatus,
                         decibelLevel : audioLevel,
                         attentionQuotient : 0,
-                        presence : presence,
                         drowsy : drowsy,
                         randomCheck : randomCheck,
                         mouthOpen : mouthOpen
@@ -95,7 +110,6 @@ Meteor.methods({
                         tabstatus : tabStatus,
                         decibelLevel : audioLevel,
                         attentionQuotient : 0,
-                        presence : presence,
                         drowsy : drowsy,
                         randomCheck : randomCheck,
                         mouthOpen : mouthOpen,
@@ -111,7 +125,6 @@ Meteor.methods({
                         tabstatus : tabStatus,
                         decibelLevel : audioLevel,
                         attentionQuotient : 0,
-                        presence : presence,
                         drowsy : drowsy,
                         randomCheck : randomCheck,
                         mouthOpen : mouthOpen
@@ -127,10 +140,12 @@ Meteor.methods({
                                 tabstatus : tabStatus,
                                 decibelLevel : audioLevel,
                                 attentionQuotient : 0,
-                                presence : presence,
                                 drowsy : drowsy,
                                 randomCheck : randomCheck,
-                                mouthOpen : mouthOpen
+                                mouthOpen : mouthOpen,
+                                drowsyCount : drowsyCount,
+                                mouthOpenCount : mouthOpenCount,
+                                lookingCount : lookingCount,
                             }
                            
                         })
@@ -145,9 +160,11 @@ Meteor.methods({
                                 tabstatus : tabStatus,
                                 decibelLevel : audioLevel,
                                 attentionQuotient : 0,
-                                presence : presence,
                                 drowsy : drowsy,
-                                mouthOpen : mouthOpen
+                                mouthOpen : mouthOpen,
+                                drowsyCount : drowsyCount,
+                                mouthOpenCount : mouthOpenCount,
+                                lookingCount : lookingCount,
                             }
                            
                         })

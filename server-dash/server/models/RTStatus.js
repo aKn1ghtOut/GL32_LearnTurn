@@ -52,15 +52,28 @@ RTStatus.schema = new Schema({
 		type : Number,
 	},
 
-	presence : {
-		type : Boolean,
-		defaultValue: true
-	},
-
 	drowsy : {
 		type : Boolean,
 		defaultValue : false,
-	}
+	},
+	
+	mouthOpenCount : {
+		type : Number,
+		defaultValue : 0,
+	},
+
+	drowsyCount : {
+		type : Number,
+		defaultValue : 0,
+	},
+
+	lookingCount : {
+		type : Number,
+		defaultValue : 0,
+	},
+
+	
+	
 	
 })
 
