@@ -14,6 +14,14 @@ Meteor.publish("User.login", function(){
 
 });
 
+Meteor.publish("dataPackets.get", function(){
+    
+    let sessionActive = Sessions.find({status:true, userId : Meteor.userId()}).fetch();
+    let sessionId = sessionActive[0]._id;
+    return DataPacket.find({sessionId : sessionId});
+
+});
+
 
 Meteor.methods({
 	
@@ -48,6 +56,7 @@ Meteor.methods({
                 DataPacket.insert({
                     userId : userId,
                     sessionId : sessionId,
+                    username : "Moksh",
                     onsceen : looking,
                     tabstatus : tabStatus,
                     decibelLevel : audioLevel

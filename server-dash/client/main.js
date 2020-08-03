@@ -17,6 +17,7 @@ import SettingsContainer from "./views/Settings"
 import ClassPageContainer from './views/Classes';
 import HomePage from './views/Home';
 import Header from './components/Header';
+import reportContainer from './views/Reports'
 
 
 const appHistory = createBrowserHistory();
@@ -40,7 +41,7 @@ render(){
 			<Route path="/classes" component={ClassPageContainer}/>
 			<Route path="/settings" component={SettingsContainer}/>
 			<Route path="/logout" component={HomePage}/>
-				
+			<Route path="/report" component={reportContainer}/>	
 			</Switch>
 			<Footer/>
 		</Router>

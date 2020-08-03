@@ -16,6 +16,10 @@ DataPacket.schema = new Schema({
 		type : String,
 	},
 
+	username : {
+		type : String,
+	},
+
 	sessionId : {
 		type : String,
 	},

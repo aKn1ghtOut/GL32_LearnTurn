@@ -12,7 +12,7 @@ import Sessions from "../../models/Sessions";
 import RTStatus from "../../models/RTStatus";
 
 
-class AttentionUserInfo extends Component {
+class HomeTable extends Component {
 
 	componentWillReceiveProps(props)
 	{
@@ -23,32 +23,34 @@ class AttentionUserInfo extends Component {
 
 		return (
 
-					<table className = "infoTable">
-						<tbody>
+			<div className = "tableContainer">
+			<table className = "infoTable">
+				<tbody>
+					<tr>
+						<th>Name</th>
+						<th>Attendance Status</th>
+						<th>Tab Status</th>
+						<th>Audio Status</th>
+					</tr>
+					{
+						this.props.loading ? null :
+						this.props.RTStatus.map(el => (
 							<tr>
-								<th>Name</th>
-								<th>Tab Status</th>
-								<th>Looking</th>
-								<th>Audio Level</th>
+								<td>{el.username}</td>
+								<td>{el.tabstatus ? "Yes" : "No"}</td>
+								<td>{el.looking ? "Yes" : "No"}</td>
+								<td>{Math.round(el.decibelLevel * 1000)}</td>
 							</tr>
-							{
-								this.props.loading ? null :
-								this.props.RTStatus.map(el => (
-									<tr>
-										<td>{el.username}</td>
-										<td>{el.tabstatus ? "Yes" : "No"}</td>
-										<td>{el.looking ? "Yes" : "No"}</td>
-										<td>{Math.round(el.decibelLevel * 1000)}</td>
-									</tr>
-								)) 
-							}
-						</tbody>
-					</table>
+						)) 
+					}
+				</tbody>
+			</table>
+		</div>
 		)
 	}
 }
 
-const AttentionContainer = withTracker( (props) => {
+const HomeTableContainer = withTracker( (props) => {
 
 	const attention = Meteor.subscribe("AttentionDetails.get",props.sessionActive);
 	const loading = attention.ready() ? false : true;
@@ -58,8 +60,8 @@ const AttentionContainer = withTracker( (props) => {
 	  RTStatus: loading || RTStatus.find({}).fetch()
 	};
 
-})(AttentionUserInfo);
+})(HomeTable);
 
 
 
-export default AttentionContainer;
+export default HomeTableContainer;
