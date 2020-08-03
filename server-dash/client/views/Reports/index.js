@@ -29,10 +29,14 @@ class report extends Component
 					<table className = "data-table">
 						<tbody>
 							<tr>
-								<th>Name</th>
+								<th>email</th>
 								<th>Tab Status</th>
 								<th>Looking</th>
 								<th>Audio Level</th>
+								<th>Mouth open</th>
+								<th>Presence</th>
+								<th>Drowsy</th>
+								<th>Random Check</th>
 								<th>Time</th>
 							</tr>
 							{
@@ -40,10 +44,14 @@ class report extends Component
 								this.props.data.map(el => (
 									
 									<tr>
-										<td>moksh</td>
+										<td>{el.email}</td>
 										<td>{el.tabstatus? "Yes" : "No"}</td>
 										<td>{el.onscreen? "Yes" : "No"}</td>
 										<td>{el.decibelLevel * 1000}</td>
+										<td>{el.mouthOpen? "Yes" : "No"}</td>
+										<td>{el.presence? "Yes" : "No"}</td>
+										<td>{el.drowsy? "Yes" : "No"}</td>
+										<td>{el.randomCheck}</td>
 										<td>{el.serial.toLocaleString() }</td>
 									</tr>
 									

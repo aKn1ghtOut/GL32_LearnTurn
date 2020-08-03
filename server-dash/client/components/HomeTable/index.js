@@ -27,19 +27,21 @@ class HomeTable extends Component {
 			<table className = "infoTable">
 				<tbody>
 					<tr>
-						<th>Name</th>
-						<th>Attendance Status</th>
+						<th>Email</th>
+						<th>Attention Score</th>
 						<th>Tab Status</th>
 						<th>Audio Status</th>
+						<th>Joined At</th>
 					</tr>
 					{
 						this.props.loading ? null :
 						this.props.RTStatus.map(el => (
 							<tr>
-								<NavLink to={'/report'}>{el.username}</NavLink>
+								<NavLink to={'/report'}>{el.email}</NavLink>
+								<td>{el.attentionQuotient}</td>
 								<td>{el.tabstatus ? "Yes" : "No"}</td>
-								<td>{el.looking ? "Yes" : "No"}</td>
 								<td>{Math.round(el.decibelLevel * 1000)}</td>
+								<td>{el.joinedAt.toLocaleString()}</td>
 							</tr>
 						)) 
 					}

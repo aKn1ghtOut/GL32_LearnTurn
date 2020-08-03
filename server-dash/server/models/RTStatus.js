@@ -10,17 +10,12 @@ RTStatus.schema = new Schema({
 		type : String,
 	},
 
-	username: {
+	email: {
 		type : String,
 	},
 
 	sessionId: {
 		type : String,
-	},
-
-	datetime: {
-		type: Date,
-		defaultValue: new Date()
 	},
 
 	onscreen: {
@@ -31,11 +26,6 @@ RTStatus.schema = new Schema({
 	tabstatus: {
 		type: Boolean,
 		defaultValue:	true
-	},
-
-	attentionStatus: {
-		type: Boolean,
-		defaultValue:	true,
 	},
 
 	decibelLevel: {
@@ -52,6 +42,25 @@ RTStatus.schema = new Schema({
 		defaultValue: new Date()
 	},
 
+	
+	mouthOpen : {
+		type : Boolean,
+		defaultValue : false
+	},
+
+	randomCheck : {
+		type : Number,
+	},
+
+	presence : {
+		type : Boolean,
+		defaultValue: true
+	},
+
+	drowsy : {
+		type : Boolean,
+		defaultValue : false,
+	}
 	
 })
 

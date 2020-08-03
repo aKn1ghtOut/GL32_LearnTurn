@@ -26,21 +26,30 @@ class AttentionUserInfo extends Component {
 					<table className = "infoTable">
 						<tbody>
 							<tr>
-								<th>Name</th>
+								<th>Email</th>
 								<th>Tab Status</th>
 								<th>Looking</th>
 								<th>Audio Level</th>
+								<th>presence</th>
+								<th>drowsy</th>
+								<th>Mouth open</th>
+								<th>Random Check</th>
+								
 							</tr>
 							{
 								this.props.loading ? null :
 								this.props.RTStatus.map(el => (
 									<tr>
 										<td>
-										<NavLink to={'/report'}>{el.username}</NavLink>
+										<NavLink to={'/report'}>{el.email}</NavLink>
 										</td>
 										<td>{el.tabstatus ? "Yes" : "No"}</td>
 										<td>{el.onscreen ? "Yes" : "No"}</td>
 										<td>{Math.round(el.decibelLevel * 1000)}</td>
+										<td>{el.presence ? "Yes" : "No"}</td>
+										<td>{el.drowsy ? "Yes" : "No"}</td>
+										<td>{el.mouthOpen ? "Yes" : "No"}</td>
+										<td>{el.randomCheck}</td>
 									</tr>
 								)) 
 							}

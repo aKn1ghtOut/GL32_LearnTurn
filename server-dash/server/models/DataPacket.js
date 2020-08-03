@@ -16,7 +16,7 @@ DataPacket.schema = new Schema({
 		type : String,
 	},
 
-	username : {
+	email : {
 		type : String,
 	},
 
@@ -38,6 +38,26 @@ DataPacket.schema = new Schema({
 		type: Number,
 		defaultValue:	0
 	},
+
+	mouthOpen : {
+		type : Boolean,
+		defaultValue : false
+	},
+
+	randomCheck : {
+		type : Number,
+	},
+
+	presence : {
+		type : Boolean,
+		defaultValue: true
+	},
+
+	drowsy : {
+		type : Boolean,
+		defaultValue : false,
+	}
+
 })
 
 DataPacket.attachSchema(DataPacket.schema);

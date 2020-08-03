@@ -27,18 +27,21 @@ Meteor.methods({
 	
 	'dataPacket.get'(params){
 
-        const {looking,tabStatus,audioLevel} = params;
+        const {looking,tabStatus,audioLevel,mouthOpen,drowsy,presence,randomCheck} = params;
 
         check(looking, Boolean);
         check(tabStatus, Boolean);
         check(audioLevel, Number);
+        check(randomCheck, Number);
+        check(presence, Boolean);
+        check(drowsy, Boolean);
+        check(mouthOpen, Boolean);
 
         let userId = Meteor.userId();
         let user = Meteor.users.find({_id : userId}).fetch();
+        let email = user[0].emails[0].address;
 
-        let email = "";
-        user.map((el) => email = el.email);
-        
+            
         let roomActive = Rooms.find({status : true, attendees: email }).fetch();
 
         if(roomActive.length != 0){
@@ -56,33 +59,47 @@ Meteor.methods({
                 DataPacket.insert({
                     userId : userId,
                     sessionId : sessionId,
-                    username : "Moksh",
+                    email : email,
                     onsceen : looking,
                     tabstatus : tabStatus,
-                    decibelLevel : audioLevel
+                    decibelLevel : audioLevel,
+                    mouthOpen : mouthOpen,
+                    presence : presence,
+                    drowsy : drowsy,
+                    randomCheck : randomCheck,
+                    serial : new Date(),
                 });
 
                 if(checkEntry.length == 0 ){
 
                     console.log({
                         userId : userId,
-                        username : "moksh",
+                        email : email,
                         sessionId: sessionId, 
                         onsceen : looking,
                         tabstatus : tabStatus,
                         decibelLevel : audioLevel,
-                        attentionQuotient : 0
+                        attentionQuotient : 0,
+                        presence : presence,
+                        drowsy : drowsy,
+                        randomCheck : randomCheck,
+                        mouthOpen : mouthOpen
                     });
 
                     RTStatus.insert ({
                         userId : userId,
-                        username : "moksh",
+                        email : email,
                         sessionId: sessionId, 
                         sessionId: sessionId, 
                         onsceen : looking,
                         tabstatus : tabStatus,
                         decibelLevel : audioLevel,
-                        attentionQuotient : 0
+                        attentionQuotient : 0,
+                        presence : presence,
+                        drowsy : drowsy,
+                        randomCheck : randomCheck,
+                        mouthOpen : mouthOpen,
+                        joinedAt : new Date(),
                     })
                 } else {
 
@@ -93,22 +110,49 @@ Meteor.methods({
                         onsceen : looking,
                         tabstatus : tabStatus,
                         decibelLevel : audioLevel,
-                        attentionQuotient : 0
+                        attentionQuotient : 0,
+                        presence : presence,
+                        drowsy : drowsy,
+                        randomCheck : randomCheck,
+                        mouthOpen : mouthOpen
                     });
-
-                    RTStatus.update ({
-                        userId : userId,
-                        sessionId : sessionId
-                    },
-                    {
-                        $set : {
-                            onsceen : looking,
-                            tabstatus : tabStatus,
-                            decibelLevel : audioLevel,
-                            attentionQuotient : 0
-                        }
-                       
-                    })
+                    if(randomCheck == 0) {
+                        RTStatus.update ({
+                            userId : userId,
+                            sessionId : sessionId
+                        },
+                        {
+                            $set : {
+                                onsceen : looking,
+                                tabstatus : tabStatus,
+                                decibelLevel : audioLevel,
+                                attentionQuotient : 0,
+                                presence : presence,
+                                drowsy : drowsy,
+                                randomCheck : randomCheck,
+                                mouthOpen : mouthOpen
+                            }
+                           
+                        })
+                    } else {
+                        RTStatus.update ({
+                            userId : userId,
+                            sessionId : sessionId
+                        },
+                        {
+                            $set : {
+                                onsceen : looking,
+                                tabstatus : tabStatus,
+                                decibelLevel : audioLevel,
+                                attentionQuotient : 0,
+                                presence : presence,
+                                drowsy : drowsy,
+                                mouthOpen : mouthOpen
+                            }
+                           
+                        })
+                    }
+                  
                 }
             }
         }
