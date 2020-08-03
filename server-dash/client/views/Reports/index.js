@@ -37,8 +37,8 @@ class report extends Component
 							</tr>
 							{
 								this.props.loading ? null :
-								this.props.data.map(el =>{
-									if(el.userId == Meteor.userId()){
+								this.props.data.map(el => (
+									
 									<tr>
 										<td>moksh</td>
 										<td>{el.tabstatus? "Yes" : "No"}</td>
@@ -46,8 +46,8 @@ class report extends Component
 										<td>{el.decibelLevel * 1000}</td>
 										<td>{el.serial.toLocaleString() }</td>
 									</tr>
-									}
-								})
+									
+								))
 							}
 						</tbody>
 					</table>
@@ -63,7 +63,7 @@ const reportContainer = withTracker( (props) => {
 	const loading = data.ready() ? false : true ;
 	return {
 		loading,
-		data : loading || DataPacket.find({}).fetch()
+		data : loading || DataPacket.find({userId : Meteor.userId()}).fetch()
 	};
 
 })(report);

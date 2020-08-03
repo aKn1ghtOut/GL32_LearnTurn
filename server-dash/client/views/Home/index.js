@@ -26,7 +26,7 @@ class HomePage extends Component
 				
 
 				 <HomeTable  sessionActive = {
-					this.props.loading ? null :
+					this.props.loading || this.props.sessionActive.length == 0 ? null :
 					this.props.sessionActive[0]._id
 					}/> 
 

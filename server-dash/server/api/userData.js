@@ -85,6 +85,17 @@ Meteor.methods({
                         attentionQuotient : 0
                     })
                 } else {
+
+                    console.log({
+                        userId : userId,
+                        username : "moksh",
+                        sessionId: sessionId, 
+                        onsceen : looking,
+                        tabstatus : tabStatus,
+                        decibelLevel : audioLevel,
+                        attentionQuotient : 0
+                    });
+
                     RTStatus.update ({
                         userId : userId,
                         sessionId : sessionId

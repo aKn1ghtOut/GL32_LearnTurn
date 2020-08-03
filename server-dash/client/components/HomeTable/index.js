@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { withTracker } from "meteor/react-meteor-data"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretSquareRight } from "@fortawesome/free-regular-svg-icons";
@@ -36,7 +36,7 @@ class HomeTable extends Component {
 						this.props.loading ? null :
 						this.props.RTStatus.map(el => (
 							<tr>
-								<td>{el.username}</td>
+								<NavLink to={'/report'}>{el.username}</NavLink>
 								<td>{el.tabstatus ? "Yes" : "No"}</td>
 								<td>{el.looking ? "Yes" : "No"}</td>
 								<td>{Math.round(el.decibelLevel * 1000)}</td>
