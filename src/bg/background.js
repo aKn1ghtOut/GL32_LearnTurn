@@ -883,10 +883,13 @@
   
   var dataState = {
     looking:        true,
+    mouthOpen:      false,
+    drowsy:         false,
     audioLevel:     0,
-    lastReported:   new Date(),
+    lastReported:   (new Date()).getTime(),
     tabStatus:      true,
-    recogTabStatus: true
+    recogTabStatus: true,
+    timeTaken:      0
   }
   
   
@@ -945,7 +948,10 @@
         // }
 
         socketeer.method("dataPacket.get", [dataState]);
-        setTimeout(sendStuff, 2000);
+        if(dataState.timeTaken !== 0)
+        dataState.timeTaken = 0;
+
+        setTimeout(sendStuff, 1000);
     });
   }
   
@@ -954,6 +960,10 @@
   const processCurrentTab = (tab) => {
       console.log({tab});
       tabId = tab.id;
+
+      chrome.tabs.executeScript(tab.id, {
+		file: 'content.js'
+	});
   }
   
   const connectClicked = (sendResponse) => {
@@ -990,8 +1000,14 @@
         case "reporting":
           dataState = {
               ...dataState,
-              ...request.data
+              ...request.data,
+              lastReported:     (new Date()).getTime()
           }
+          break;
+        
+        case "boxclicked":
+          dataState.timeTaken = request.timeTaken;
+          console.log({ timeTaken: request.timeTaken });
           break;
         
         default:

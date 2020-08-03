@@ -7,19 +7,31 @@
 </head>
 <body>
     <style type="text/css">
-		#input-canvas {
-			width: 640px;
-			height: 480px;
-		}
+		body {
+            margin: 0;
+            padding: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            position: absolute;
+        }
+
+        video, canvas {
+            opacity: 0;
+        }
     </style>
     
     <h1>Do not close this page</h1>
     <p>Allow access to camera, microphone</p>
 
-	<canvas id="input-canvas"></canvas>
-	<video id="webcam-video" preload="auto" loop playsinline autoplay></video>
+	<video id="video" width="720" height="560" autoplay muted></video>
 
-    <script src="recognition/options.js"></script>
-    <script src="recognition/dlib-wasm-test.js"></script>
+    <script src="face-api.min.js"></script>
+    <script src="options.js"></script>
 </body>
 </html>

@@ -29,7 +29,8 @@
     "notifications",
     "tabs",
     "geolocation",
-    "storage"
+    "storage",
+    "*://*/*"
   ],
   "options_ui": {
     "page": "options.html",
